@@ -84,7 +84,7 @@ public class CallLogPlugin implements FlutterPlugin, ActivityAware, MethodCallHa
     @Override
     public void onAttachedToActivity(@NonNull ActivityPluginBinding activityPluginBinding) {
         this.activityPluginBinding = activityPluginBinding;
-        activityPluginBinding.addRequestPermissionsResultListener(this);
+//        activityPluginBinding.addRequestPermissionsResultListener(this);
         activity = activityPluginBinding.getActivity();
         Log.d(TAG, "onAttachedToActivity");
     }
@@ -103,7 +103,7 @@ public class CallLogPlugin implements FlutterPlugin, ActivityAware, MethodCallHa
     public void onDetachedFromActivity() {
         Log.d(TAG, "onDetachedFromActivity");
         if (activityPluginBinding != null) {
-            activityPluginBinding.removeRequestPermissionsResultListener(this);
+//            activityPluginBinding.removeRequestPermissionsResultListener(this);
             activityPluginBinding = null;
             activity = null;
         }
@@ -118,17 +118,17 @@ public class CallLogPlugin implements FlutterPlugin, ActivityAware, MethodCallHa
 
         request = c;
         result = r;
-
-        String[] perm = {Manifest.permission.READ_CALL_LOG, Manifest.permission.READ_PHONE_STATE};
-        if (hasPermissions(perm)) {
-            handleMethodCall();
-        } else {
-            if (activity != null) {
-                ActivityCompat.requestPermissions(activity, perm, 0);
-            } else {
-                r.error("MISSING_PERMISSIONS", "Permission READ_CALL_LOG or READ_PHONE_STATE is required for plugin. Hovewer, plugin is unable to request permission because of background execution.", null);
-            }
-        }
+        handleMethodCall();
+//        String[] perm = {Manifest.permission.READ_CALL_LOG, Manifest.permission.READ_PHONE_STATE};
+//        if (hasPermissions(perm)) {
+//            handleMethodCall();
+//        } else {
+//            if (activity != null) {
+//                ActivityCompat.requestPermissions(activity, perm, 0);
+//            } else {
+//                r.error("MISSING_PERMISSIONS", "Permission READ_CALL_LOG or READ_PHONE_STATE is required for plugin. Hovewer, plugin is unable to request permission because of background execution.", null);
+//            }
+//        }
     }
 
     @Override
